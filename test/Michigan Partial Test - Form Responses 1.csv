@@ -1,4 +1,4 @@
-Timestamp,Name,Email Address,Candidate Rankings [Andrew Gallavan],Candidate Rankings [Mike Maturen],Candidate Rankings [Case Michielson],Candidate Rankings [Paul Schultz],Candidate Rankings [John Hayden],Candidate Rankings [Lucy Moye],,,
+Timestamp,Name,Email Address,Do you approve the draft bylaws and petition for autonomous status?,Candidate Rankings [Mike Maturen],Candidate Rankings [Case Michielson],Candidate Rankings [Paul Schultz],Candidate Rankings [John Hayden],Candidate Rankings [Lucy Moye],,,
 3/1/2021 17:10:31,,,Second Place,First Place,Third Place,Fourth Place,Sixth Place,Fifth Place,,,
 3/1/2021 17:13:53,,,Fourth Place,First Place,Third Place,Fifth Place,Sixth Place,Second Place,,,
 3/1/2021 17:14:09,,,Second Place,Fifth Place,First Place,Third Place,Sixth Place,Fourth Place,,,
@@ -10,7 +10,7 @@ Timestamp,Name,Email Address,Candidate Rankings [Andrew Gallavan],Candidate Rank
 3/1/2021 18:21:20,,,Fourth Place,Third Place,Fifth Place,Second Place,Sixth Place,First Place,,,
 3/1/2021 18:29:49,,,Fifth Place,Third Place,Fourth Place,Second Place,Sixth Place,First Place,,locked in,
 ,,,,,,,,,,contradicts locked in results,
-,,,,,,,,,,,
+,,,,,,,,,,true tie,
 ,,,Raw results by sequence of calculation (Unsorted),,,Results sorted by margin of victory (number of votes over loser),,,,optional last step,
 ,,,,,,This level is sufficient for results.,,,,,
 ,,,Mike beats Andrew,6-4,,Andrew beats John,8-2,,,Andrew beats John,8-2
@@ -30,8 +30,18 @@ Timestamp,Name,Email Address,Candidate Rankings [Andrew Gallavan],Candidate Rank
 ,,,Lucy over John,7-3,,Paul ties Lucy,5-5,,,Paul ties Lucy,5-5
 ,,,,,,,,,,,
 ,,,,,,,,,,1,Lucy
-,,,,,,,,,,2,
-,,,,,,,,,,3,
-,,,,,,,,,,4,
+,,,,,,,,,,2,Mike
+,,,,,,,,,,2,Andrew
+,,,,,,,,,,2,Paul
 ,,,,,,,,,,5,Case
 ,,,,,,,,,,6,John
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+3/8/2021 17:39:59,Dane Garrett,Dane.r.garrett@gmail.com,Yes,,,,,,,,
+3/8/2021 19:14:33,Yea,Beth.heerdt@gmail.com,Yes,,,,,,,,
+3/9/2021 6:08:33,Cedric Benner,Pastorced@verizon.net,Yes,,,,,,,,
+3/9/2021 6:53:12,Trevor Peterson,abuian@zoho.com,Yes,,,,,,,,
+3/9/2021 9:59:24,Andrew D Sorokowski,andrewsorokowski@gmail.com,Yes,,,,,,,,
+3/9/2021 17:31:51,Grace Aldershof,G.aldershof.garrett@gmail.com,No,,,,,,,,
