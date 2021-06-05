@@ -17,6 +17,7 @@ document.getElementById('fileInput').addEventListener('change', handleFileSelect
 
 // handle the input change
 var diplayContent = false;
+var processContent = false;
 var fileContent = "";
 function handleFileSelect(event){
     // create a file reader
@@ -120,6 +121,7 @@ function handleDataTable(){
 	}
 	
 	diplayContent = false;
+	processContent = true;
 }
 
 // database of places
@@ -146,127 +148,121 @@ const places = [
 	["twenty", "twentieth"],
 ];
 function processData(){
-	if(fileContent !== ""){
-		// gets table
-		var oTable = document.getElementById('fileContent');
-		// gets rows of table
-		var rowLength = oTable.rows.length;
-		// loops through rows    
-		for (i = 0; i < rowLength; i++){
-			// gets cells of current row  
-			var oCells = oTable.rows.item(i).cells;
-			// loops through each cell in current row
-			for(var j = 0; j < oCells.length; j++){
-				// get your cell info here
-				var cellVal = oCells.item(j).innerHTML;
-				// console.log(cellVal);
-			}
-		}
-		
-		// find all the pairs
-		var pairsOut = document.getElementById("pairs");
-		var candidates = seperators[seperators.length-1];
-		var pairs = [];
-		for(var i = 0; i < candidates.length; i++){
-			for(var j = i + 1; j < candidates.length; j++){
-				pairs.push([candidates[i], candidates[j], 0, 0, 0]);
-			}
-		}
-		
-		// log if there is an error or not
-		if(pairs.length === numCombinations(candidates.length, 2)){
-			console.log("[✔] The correct amount of pairs was found");
-		}else{
-			console.log("[✘] The incorrect amount of pairs was found");
-		}
-		
-		// calculate scores for each pair
-		for(var p = 0; p < pairs.length; p++){
-			// reset score for the pair
-			var score1 = 0;
-			var score2 = 0;
-			
-			// find the indexes on the ballot for both candidates
-			var candidate1Index = candidates.indexOf(pairs[p][0]) + seperators.length-1;
-			var candidate2Index = candidates.indexOf(pairs[p][1]) + seperators.length-1;
-			
-			// loop through all the ballots to find the scores
-			for(var b = 0; b < ballots.length; b++){
-				// get the candidate content for the ballot
-				var ballotContent1 = ballots[b][candidate1Index].toLowerCase();
-				var ballotContent2 = ballots[b][candidate2Index].toLowerCase();
-				
-				// find what the candidate was ranked in number form on the ballot
-				for(var n = Math.min(places.length - 1, seperators[seperators.length - 1].length); n >= 0; n--){
-					if(ballotContent1.includes(n + 1) || ballotContent1.includes(places[n][0]) || ballotContent1.includes(places[n][1])){
-						ballotContent1 = n+1;
-						break;
-					}
-				}
-				for(var n = Math.min(places.length - 1, seperators[seperators.length - 1].length); n >= 0; n--){
-					if(ballotContent2.includes(n + 1) || ballotContent2.includes(places[n][0]) || ballotContent2.includes(places[n][1])){
-						ballotContent2 = n+1;
-						break;
-					}
-				}
-				
-				if(ballotContent1 && ballotContent2){
-					// add to the score
-					if(ballotContent1 > ballotContent2){
-						score1++;
-					}else if(ballotContent2 > ballotContent1){
-						score2++;
-					}else{
-						score1++;
-						score2++;
-					}
-				}
-			}
-			
-			// add the data to the pair
-			pairs[p][2] = score1;
-			pairs[p][3] = score2;
-			pairs[p][4] = Math.round(score1 / (score1 + score2) * 100);
-		}
-		
-		// switch the candidates so that the winner is first
-		for(var p = 0; p < pairs.length; p++){
-			if(pairs[p][3] > pairs[p][2]){
-				var temp = pairs[p][0];
-				pairs[p][0] = pairs[p][1];
-				pairs[p][1] = temp;
-				temp = pairs[p][2];
-				pairs[p][2] = pairs[p][3];
-				pairs[p][3] = temp;
-				pairs[p][4] = Math.round(pairs[p][2] / (pairs[p][2] + pairs[p][3]) * 100);
-			}
-		}
-		
-		// sort the pairs by score
-		pairs.sort(function(a, b) {
-			return b[4] - a[4];
-		});
-
-		// clear the HTML
-		pairsOut.innerHTML = "";
-		
-		// diplay all the pairs
-		for(var p = 0; p < pairs.length; p++){
-			if(pairs[p][2] === pairs[p][3]){
-				pairsOut.innerHTML += pairs[p][0] + " ties " + pairs[p][1] + " " + pairs[p][2] + " - " + pairs[p][3] + " " + pairs[p][4] + "%<br>";
-			}else{
-				pairsOut.innerHTML += pairs[p][0] + " wins " + pairs[p][1] + " " + pairs[p][2] + " - " + pairs[p][3] + " " + pairs[p][4] + "%<br>";
-			}
+	// find all the pairs
+	var pairsOut = document.getElementById("pairs");
+	var candidates = seperators[seperators.length-1];
+	var pairs = [];
+	for(var i = 0; i < candidates.length; i++){
+		for(var j = i + 1; j < candidates.length; j++){
+			pairs.push([candidates[i], candidates[j], 0, 0, 0]);
 		}
 	}
+	
+	// log if there is an error or not
+	if(pairs.length === numCombinations(candidates.length, 2)){
+		console.log("[✔] The correct amount of pairs was found");
+	}else{
+		console.log("[✘] The incorrect amount of pairs was found");
+	}
+	
+	// calculate scores for each pair
+	for(var p = 0; p < pairs.length; p++){
+		// reset score for the pair
+		var score1 = 0;
+		var score2 = 0;
+		
+		// find the indexes on the ballot for both candidates
+		var candidate1Index = candidates.indexOf(pairs[p][0]) + seperators.length - 1;
+		var candidate2Index = candidates.indexOf(pairs[p][1]) + seperators.length - 1;
+		
+		// loop through all the ballots to find the scores
+		for(var b = 0; b < ballots.length; b++){
+			// get the candidate content for the ballot
+			var ballotContent1 = ballots[b][candidate1Index].toLowerCase();
+			var ballotContent2 = ballots[b][candidate2Index].toLowerCase();
+			
+			// find what the candidate was ranked in number form on the ballot
+			for(var n = Math.min(places.length - 1, seperators[seperators.length - 1].length); n >= 0; n--){
+				if(ballotContent1.includes(n + 1) || ballotContent1.includes(places[n][0]) || ballotContent1.includes(places[n][1])){
+					ballotContent1 = n + 1;
+					break;
+				}
+			}
+			for(var n = Math.min(places.length - 1, seperators[seperators.length - 1].length); n >= 0; n--){
+				if(ballotContent2.includes(n + 1) || ballotContent2.includes(places[n][0]) || ballotContent2.includes(places[n][1])){
+					ballotContent2 = n + 1;
+					break;
+				}
+			}
+			
+			if(ballotContent1 && ballotContent2){
+				// add to the score
+				if(ballotContent1 < ballotContent2){
+					score1++;
+				}else if(ballotContent2 < ballotContent1){
+					score2++;
+				}else{
+					score1++;
+					score2++;
+				}
+			}
+		}
+		
+		// add the data to the pair
+		pairs[p][2] = score1;
+		pairs[p][3] = score2;
+		pairs[p][4] = Math.round(score1 / (score1 + score2) * 100);
+	}
+	
+	// switch the candidates so that the winner is first
+	for(var p = 0; p < pairs.length; p++){
+		if(pairs[p][3] > pairs[p][2]){
+			var temp = pairs[p][0];
+			pairs[p][0] = pairs[p][1];
+			pairs[p][1] = temp;
+			temp = pairs[p][2];
+			pairs[p][2] = pairs[p][3];
+			pairs[p][3] = temp;
+			pairs[p][4] = Math.round(pairs[p][2] / (pairs[p][2] + pairs[p][3]) * 100);
+		}
+	}
+	
+	// sort the pairs by score
+	pairs.sort(function(a, b) {
+		return b[4] - a[4];
+	});
+
+	// clear the HTML
+	pairsOut.innerHTML = "";
+	
+	// diplay all the pairs
+	for(var p = 0; p < pairs.length; p++){
+		if(pairs[p][2] === pairs[p][3]){
+			pairsOut.innerHTML += "<span id='pair_" + p + "'>" + pairs[p][0].replace("Candidate Rankings ", "") + " ties " + pairs[p][1].replace("Candidate Rankings ", "") + " " + pairs[p][2] + " - " + pairs[p][3] + " " + pairs[p][4] + "%</span><br>";
+		}else{
+			pairsOut.innerHTML += "<span id='pair_" + p + "'>" + pairs[p][0].replace("Candidate Rankings ", "") + " wins " + pairs[p][1].replace("Candidate Rankings ", "") + " " + pairs[p][2] + " - " + pairs[p][3] + " " + pairs[p][4] + "%</span><br>";
+		}
+	}
+
+	// lock in the pairs
+	document.getElementById("pair_0").style.backgroundColor = "LimeGreen";
+	for(var p = 0; p < pairs.length; p++){
+		
+	}
+
+	processContent = false;
 }
 
 // draw loop
 function draw(){
-    // add the data once inputed
-    if(diplayContent && fileContent !== ""){
-        handleDataTable();
-    }
+	// add the data once inputed
+	if(fileContent !== ""){
+		if(diplayContent){
+			handleDataTable();
+		}else if(processContent){
+			processData();
+		}
+	}
 }
 
 // run the draw loop
