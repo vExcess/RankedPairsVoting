@@ -5,7 +5,10 @@
 		Update Log:
 		3/6/2021, 0+5 = 5 hours
 		3/9/2021, 5+2 = 7 hours
-		3/16/2021, 7+2 = 8 hours
+		3/16/2021, 7+2 = 9 hours
+		3/28/2021, 9+2 = 11 hours
+		5/18/2021, 11+2 = 13 hours
+		5/29/2021, 13+1 = 14 hours
 	-->
 	<meta charset="utf-8">
 	<title>Ranked Pair Voting Calculator</title>
@@ -13,29 +16,44 @@
 	<link rel="stylesheet" href="RankedPairsVoting.css">
 </head>
 <body>
+	<!-- Nav Tool -->
 	<div id = "navTool">
-		<img src="asp-logo-2020.svg" width="1782" height="100">
+		<img src="asp-logo-2020.svg" width="100%" height="75">
 	</div>
 	
-	<br>
+	<br><br>
 	
+	<!-- Title -->
 	<h1>Ranked Pair Voting Calculator</h1>
 	
-	<p class="header"><strong>Step 1: Upload a CSV file</strong></p>
+	<!-- File Input -->
+	<p class="header">Step 1: Upload a CSV file</p>
 	<input id="fileInput" type="file" accept=".csv,.txt" onchange="handleFileSelect"/>
 	
 	<br>
 	<br>
 	
-	<p class="header"><strong>Step 2: Edit file if needed</strong></p>
-	<table id="fileContent" border="1" style="border-collapse: collapse;" contentEditable="true">
-		<tr><td>Waiting for you to upload a file...</td></tr>
-	</table>
+	<!-- Table of Data -->
+	<p class="header">Step 2: Preview File</p>
+	<div id="fileContentContainer">
+		<table id="fileContent" border="1">
+			<tr><td>Waiting for you to upload a file...</td></tr>
+		</table>
+	</div>
 	
-	<p class="header"><strong>Step 3: Form all pairs</strong></p>
-	<span id="pairs" style="font-family: monospace;">Waiting for you to upload a file...</span>
 	
-	<script src="ranked_pairs_voting.js"></script>
+	<br>
+	
+	<!-- File Output -->
+	<p class="header">Step 3: Process</p>
+	<button type="button" onclick="processData()">Process Data</button>
+	<br><br>
+	<span id="pairs">Waiting for you to upload a file...</span>
+	
+	<br><br><br><br><br>
+	
+	<!-- Get the JS to make it work -->
+	<script src="RankedPairsVoting.js"></script>
 
 </body>
 </html>
