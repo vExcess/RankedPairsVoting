@@ -3,6 +3,7 @@ body {
     font-family: 'Lato', 'Noto Sans', 'Helvetica', 'Corbel', sans-serif, 'Helvetica', 'Corbel', sans-serif;
     font-size: 13px;
     margin: 25px;
+	padding: 0px;
     overflow-x: hidden;
  }
  
@@ -13,9 +14,23 @@ body {
     z-index: 1;
     border-bottom: 2px solid rgb(84, 106, 148);
     width: 105%;
-    height: 100px;
+    height: 75px;
 }
 
 .header {
     font-size: 18px;
+	font-weight: bold;
+}
+
+#fileContentContainer {
+    height: 400px; 
+    overflow-y: scroll;
+}
+
+#fileContent {
+    border-collapse: collapse;
+}
+
+#pairs {
+    font-family: monospace;
 }
