@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- 
+		Update Log:
+		3/6/2021, 0+5 = 5 hours
+		3/9/2021, 5+2 = 7 hours
+		3/16/2021, 7+2 = 9 hours
+		3/28/2021, 9+2 = 11 hours
+		5/18/2021, 11+2 = 13 hours
+		5/29/2021, 13+1 = 14 hours
+		6/4/2021, 14+2 = 16 hours
+	-->
+	<meta charset="utf-8">
+	<title>Ranked Pair Voting Calculator</title>
+	<link rel="shortcut icon" type="image/jpg" href="https://header.tapatalk-cdn.com/c2010061_1511722501.jpg"/>
+	<link rel="stylesheet" href="src/ranked_pairs_voting.css">
+</head>
+<body>
+	<!-- Nav Tool -->
+	<div id = "navTool">
+		<img src="src/asp-logo-2020.svg" width="100%" height="75">
+	</div>
+	
+	<br><br>
+	
+	<!-- Title -->
+	<h1>Ranked Pair Voting Calculator</h1>
+	
+	<!-- File Input -->
+	<p class="header">Step 1: Upload a CSV file</p>
+	<input id="fileInput" type="file" accept=".csv,.txt" onchange="handleFileSelect"/>
+	
+	<br>
+	<br>
+	
+	<!-- Table of Data -->
+	<p class="header">Step 2: Preview File</p>
+	<div id="fileContentContainer">
+		<table id="fileContent" border="1">
+			<tr><td>Waiting for you to upload a file...</td></tr>
+		</table>
+	</div>
+	
+	
+	<br>
+	
+	<!-- File Output -->
+	<p class="header">Step 3: Process</p>
+	<span id="pairs">Waiting for you to upload a file...</span>
+	
+	<br><br><br><br><br>
+	
+	<!-- Get the JS to make it work -->
+	<script src="src/ranked_pairs_voting.js"></script>
+
+</body>
+</html>
